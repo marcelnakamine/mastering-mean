@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/marcelnakamine/mastering-mean/issues"
   },
-  "homepage": "https://github.com/marcelnakamine/mastering-mean#readme"
+  "homepage": "https://github.com/marcelnakamine/mastering-mean#readme",
+  "dependencies": {
+    "express": "^4.14.1"
+  }
 }
