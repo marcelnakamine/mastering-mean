@@ -39,6 +39,18 @@ Perform an HTTP POST request to the base _users_ route with the following exampl
 Another way to test through CLI
 
 ```
-$ curl -X POST -H "Content-Type: application/json" -d '{"firstName":"First", "lastName":"Last","email":"user@example.com","username":"username","password":"password"}' localhost:3000/users
+$ curl -X POST -H "Content-Type: application/json" -d '{"firstName":"First", "lastName":"Last","email":"user@example.com","username":"username","password":"password"}' localhost:4040/users
 ```
 
+### Read
+To retrieve all the users:
+
+```
+http://localhost:4040/users
+```
+
+To retrieve only one user:
+
+```
+http://localhost:4040/users/:userId
+```

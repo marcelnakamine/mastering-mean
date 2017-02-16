@@ -21,3 +21,22 @@ exports.list = function(req, res, next) {
     }
   });
 };
+
+// The req.user are populating by userByID method.
+// This requirement are declared in users.server.routes.js
+exports.read = function(req, res) {
+  res.json(req.user);
+};
+
+exports.userByID = function(req, res, next, id) {
+  User.findOne({
+    _id: id
+  }, (err, user) => {
+    if (err) {
+      return next(err);
+    } else {
+      req.user = user;
+      next();
+    }
+  });
+};
