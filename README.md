@@ -63,3 +63,12 @@ Or test through CLI:
 ```
 $ curl -X PUT -H "Content-Type: application/json" -d '{"lastName": "Updated"}' localhost:3000/users/[id]
 ```
+
+### Delete
+Get one \_id id in http://localhost:4040/users and use a REST tool to issue a DELETE request in http://localhost:4040/users/[id], replacing the [id] with the user's \_id value.
+
+Or test through CLI:
+
+```
+$ curl -X DELETE localhost:4040/users/[id]
+```

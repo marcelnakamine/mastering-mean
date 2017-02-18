@@ -7,7 +7,8 @@ module.exports = function(app) {
 
   app.route('/users/:userId')
   	.get(users.read)
-    .put(users.update);
+    .put(users.update)
+    .delete(users.delete);
 
   // it's a middleware to be executed before any other middleware that uses userId as a parameter
   // in this case, the users.read controller
