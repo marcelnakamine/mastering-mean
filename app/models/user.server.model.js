@@ -38,6 +38,11 @@ UserSchema.virtual('fullName').get(function(){
   this.lastName = splitName[1] || '';
 });
 
+UserSchema.statics.findOneByUsername = function(username, callback) {
+    this.findOne({ username: new RegExp(username, 'i') },
+  callback);
+};
+
 //This will force Mongoose to include getters when converting the MongoDB document to a JSON representation and will allow the output of documents using res.json() in order to include the getter's behavior. If you didn't include this, you would have your document's JSON representation ignoring the getter modifiers.
 UserSchema.set('toJSON', {getters: true})
 

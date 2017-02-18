@@ -41,6 +41,16 @@ exports.userByID = function(req, res, next, id) {
   });
 };
 
+exports.userByUsername = function(req, res, next, username) {
+  User.findOneByUsername(username, (err, user) => {
+    if (err) {
+      return next(err);
+    } else {
+      res.status(200).json(user);
+    }
+  });
+}
+
 exports.update = function(req, res, next) {
   User.findByIdAndUpdate(req.user.id, req.body, {
     'new': true
