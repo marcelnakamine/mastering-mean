@@ -28,6 +28,14 @@ const UserSchema = new Schema({
   },
 });
 
+UserSchema.virtual('fullName').get(function(){
+  return this.firstName + ' ' + this.lastName;
+}).set(function(fullName) {
+  const splitName = fullName.split(' ');
+  this.firstName = splitName[0] || '';
+  this.lastName = splitName[1] || '';
+});
+
 //This will force Mongoose to include getters when converting the MongoDB document to a JSON representation and will allow the output of documents using res.json() in order to include the getter's behavior. If you didn't include this, you would have your document's JSON representation ignoring the getter modifiers.
 UserSchema.set('toJSON', {getters: true})
 
