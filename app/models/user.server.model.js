@@ -7,12 +7,14 @@ const UserSchema = new Schema({
   lastName: String,
   email: {
     type: String,
-    set: helper.toLower
+    set: helper.toLower,
+    index: true
   },
   username: {
     type: String,
     set: helper.toLower,
-    trim: true
+    trim: true,
+    unique: true
   },
   password: {
     type: String,
