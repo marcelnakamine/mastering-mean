@@ -54,3 +54,12 @@ To retrieve only one user:
 ```
 http://localhost:4040/users/:userId
 ```
+
+### Update
+Get one \_id id in http://localhost:4040/users and use a REST tool to issue a PUT request in http://localhost:4040/users/[id], replacing the [id] with the user's \_id value.
+
+Or test through CLI:
+
+```
+$ curl -X PUT -H "Content-Type: application/json" -d '{"lastName": "Updated"}' localhost:3000/users/[id]
+```
