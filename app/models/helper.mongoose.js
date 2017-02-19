@@ -25,3 +25,7 @@ exports.fixUrl = function(url) {
     return url;
   }
 };
+
+exports.validatePassword = function(password) {
+  return password.length >= 6;
+}
