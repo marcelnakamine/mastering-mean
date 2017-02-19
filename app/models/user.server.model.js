@@ -21,7 +21,7 @@ const UserSchema = new Schema({
   },
   password: {
     type: String,
-    get: helper.toObfuscate,
+    // get: helper.toObfuscate,
     validate: [helper.validatePassword,
       'Password should be longer'
     ]
