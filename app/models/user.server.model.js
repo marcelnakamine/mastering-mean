@@ -10,7 +10,7 @@ const UserSchema = new Schema({
     type: String,
     set: helper.toLower,
     index: true,
-    match: /.+\@.+\..+/
+    match: [/.+\@.+\..+/, "Please fill a valid email address"]
   },
   username: {
     type: String,
@@ -49,6 +49,7 @@ const UserSchema = new Schema({
   }
 });
 
+// Set the 'fullname' virtual property
 UserSchema.virtual('fullName').get(function(){
   return this.firstName + ' ' + this.lastName;
 }).set(function(fullName) {
@@ -66,6 +67,7 @@ UserSchema.post('save', function(next){
     console.log('The user "' + this.username +  '" details were saved.');
 });
 
+// Use a pre-save middleware to hash the password
 UserSchema.pre('save', function(next) {
   if (this.password) {
     this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
@@ -74,15 +76,18 @@ UserSchema.pre('save', function(next) {
   next();
 });
 
+// Create an instance method for hashing a password
 UserSchema.methods.hashPassword = function(password) {
     return crypto.pbkdf2Sync(password, this.salt, 10000,
         64).toString('base64');
 };
 
+// Create an instance method for authenticating user
 UserSchema.methods.authenticate = function(password) {
     return this.password === this.hashPassword(password);
 };
 
+// Find possible not used username
 UserSchema.statics.findUniqueUsername = function(username, suffix,
     callback) {
     var possibleUsername = username + (suffix || '');
@@ -103,6 +108,10 @@ UserSchema.statics.findUniqueUsername = function(username, suffix,
 };
 
 //This will force Mongoose to include getters when converting the MongoDB document to a JSON representation and will allow the output of documents using res.json() in order to include the getter's behavior. If you didn't include this, you would have your document's JSON representation ignoring the getter modifiers.
-UserSchema.set('toJSON', {getters: true})
+UserSchema.set('toJSON', {
+  getters: true,
+  virtuals: true
+});
 
+// Create the 'User' model out of the 'UserSchema'
 mongoose.model('User', UserSchema);
